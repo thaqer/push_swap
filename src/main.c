@@ -35,8 +35,9 @@ int	main(int argc, char **argv)
 	}
 	print_stack(&a);
 	sort(&a, &b);
+	ft_printf("\n");
 	print_stack(&a);
-	
+	exit_program(&a, &b);
 }
 
 void	print_stack(t_stack *a)

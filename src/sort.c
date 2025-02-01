@@ -20,9 +20,11 @@ void	sort(t_stack *a, t_stack *b)
 		sort_2(a);
 	else if (a->size == 3)
 		sort_3(a);
+	else if (a->size == 4)
+		sort_4(a, b);
 	else if (a->size == 5)
 		sort_5(a, b);
-	else if (a->size > 5)
+	else
 		radix_sort(a, b);
 }
 
@@ -57,6 +59,13 @@ void	sort_3(t_stack *a)
 		sa(a);
 	else if (first < second && second > third && first > third)
 		rra(a);
+}
+
+void	sort_4(t_stack *a, t_stack *b)
+{
+	push_max(a, b);
+	sort_3(a);
+	pa(a, b);
 }
 
 void	sort_5(t_stack *a, t_stack *b)

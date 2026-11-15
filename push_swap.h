@@ -42,6 +42,7 @@ void				init_arguments(t_stack *a, t_stack *b, int argc,
 void				repetition(t_stack *a, t_stack *b);
 void				is_valid(char *arg, t_stack *a, t_stack *b);
 void				check_arguments(t_stack *a, t_stack *b);
+int					to_int(char *arg, t_stack *a, t_stack *b);
 void				print_stack(t_stack *a);
 void				push_stack(t_stack *stack, int value);
 void				sort(t_stack *a, t_stack *b);

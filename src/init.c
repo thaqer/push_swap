@@ -28,7 +28,7 @@ void	init_arguments(t_stack *a, t_stack *b, int argc, char **argv)
 {
 	int		x;
 	t_node	*new_node;
-	long	value;
+	int		value;
 
 	if (argc == 2)
 		parse_arguments(a, b, argv[1]);
@@ -38,14 +38,11 @@ void	init_arguments(t_stack *a, t_stack *b, int argc, char **argv)
 		x = a->size;
 		while (x > 0)
 		{
-			is_valid(argv[x], a, b);
-			value = ft_atol(argv[x]);
-			if (value > INT_MAX || value < INT_MIN)
-				error_program(a, b);
+			value = to_int(argv[x], a, b);
 			new_node = malloc(sizeof(t_node));
 			if (!new_node)
 				error_program(a, b);
-			new_node->value = (int)value;
+			new_node->value = value;
 			new_node->next = a->top;
 			a->top = new_node;
 			x--;
@@ -60,6 +57,8 @@ void	is_valid(char *arg, t_stack *a, t_stack *b)
 	x = 0;
 	if (arg[x] == '-' || arg[x] == '+')
 		x++;
+	if (!arg[x])
+		error_program(a, b);
 	while (arg[x])
 	{
 		if (!ft_isdigit(arg[x]))
@@ -75,15 +74,16 @@ void	parse_arguments(t_stack *a, t_stack *b, char *arg)
 	t_node	*new_node;
 
 	a->size = count_arguments(arg);
+	if (a->size == 0)
+		error_program(a, b);
 	numbers = ft_split(arg, ' ');
 	x = a->size - 1;
 	while (x >= 0)
 	{
-		is_valid(numbers[x], a, b);
 		new_node = malloc(sizeof(t_node));
 		if (!new_node)
 			error_program(a, b);
-		new_node->value = ft_atol(numbers[x]);
+		new_node->value = to_int(numbers[x], a, b);
 		new_node->next = a->top;
 		a->top = new_node;
 		x--;

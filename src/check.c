@@ -44,6 +44,25 @@ void	is_int(t_stack *a, t_stack *b)
 	}
 }
 
+int	to_int(char *arg, t_stack *a, t_stack *b)
+{
+	long	value;
+	int		x;
+
+	is_valid(arg, a, b);
+	x = 0;
+	if (arg[x] == '-' || arg[x] == '+')
+		x++;
+	while (arg[x] == '0' && arg[x + 1])
+		x++;
+	if (ft_strlen(arg + x) > 10)
+		error_program(a, b);
+	value = ft_atol(arg);
+	if (value > INT_MAX || value < INT_MIN)
+		error_program(a, b);
+	return ((int)value);
+}
+
 void	check_arguments(t_stack *a, t_stack *b)
 {
 	repetition(a, b);

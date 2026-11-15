@@ -1,0 +1,5 @@
+*.o
+*.a
+objs/
+push_swap
+.vscode/
